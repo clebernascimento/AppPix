@@ -1,0 +1,124 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+    flavorDimensions "default"
+
+    defaultConfig {
+        applicationId "com.itbam.pixceler"
+        minSdkVersion 24
+        targetSdkVersion 30
+        versionCode 1
+        versionName "0.1.1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", "\"http://172.100.10.58:9292\"")
+        buildConfigField("String", "BASE_URL_IMG", "\"http://172.100.10.58:2100\"")
+        buildConfigField("boolean", "IS_EMULATOR", "false")
+        buildConfigField("boolean", "IS_SELFPOS", "false")
+        buildConfigField("String", "SERIAL_NUMBER", "\"0641KC390333088\"")
+        buildConfigField("String", "BASIC_AUTH", "\"Basic bW9iaWxlOm0wYmlsM2tpb3Nr\"")
+
+        buildConfigField("String", "CLIENT", "\"kiosk\"")
+        buildConfigField("String", "GRANT_TYPE", "\"password\"")
+        buildConfigField("String", "USERNAME", "\"celer@kiosk.com\"")
+        buildConfigField("String", "PASSWORD", "\"a2lvc2tpX2RldmljZUAyMDIw\"")
+    }
+
+    productFlavors {
+        dev {
+            applicationIdSuffix ".pixceler"
+            versionNameSuffix "-pixceler"
+
+            buildConfigField("String", "BASE_URL", "\"http://172.100.10.58:9292\"")
+            buildConfigField("String", "BASE_URL_IMG", "\"http://172.100.10.58:2100\"")
+            buildConfigField("boolean", "IS_EMULATOR", "false")
+            buildConfigField("boolean", "IS_SELFPOS", "false")
+            buildConfigField("String", "SERIAL_NUMBER", "\"0641KC390333088\"")
+            buildConfigField("String", "BASIC_AUTH", "\"Basic bW9iaWxlOm0wYmlsM2tpb3Nr\"")
+        }
+
+        homolog {
+            applicationIdSuffix ".pixceler"
+            versionNameSuffix "-pixceler"
+
+            buildConfigField("String", "BASE_URL", "\"http://52.252.63.192:8181\"")
+            buildConfigField("String", "BASE_URL_IMG", "\"http://172.100.10.58:2100\"")
+            buildConfigField("boolean", "IS_EMULATOR", "false")
+            buildConfigField("boolean", "IS_SELFPOS", "false")
+            buildConfigField("String", "SERIAL_NUMBER", "\"K217D05S00038\"")
+            buildConfigField("String", "BASIC_AUTH", "\"Basic bW9iaWxlOm0wYmlsM2tpb3Nr\"")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled true
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.core:core:1.5.0-alpha05'
+
+
+    //QrCode
+    implementation 'com.github.kenglxn.QRGen:android:2.6.0'
+    // QRCode Reader
+    implementation 'com.github.nisrulz:qreader:2.1.1'
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+    implementation 'com.google.zxing:core:3.4.0'
+
+    // RETROFIT
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+    // LOMBOK
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    //View Model
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+
+    //AppCenter
+    def appCenterSdkVersion = '4.0.0'
+    implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+    implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
+
+
+}
+repositories {
+    mavenCentral()
+    jcenter()
+}
